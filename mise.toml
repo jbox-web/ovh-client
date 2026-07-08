@@ -1,0 +1,33 @@
+[settings]
+experimental = true
+
+[tools]
+ruby = "3.4.9"
+
+[settings.ruby]
+compile = false
+
+[vars]
+SPEC_OPTS = "{% if exec(command='(tty -s && echo true) || echo false') == 'true' %}--format documentation{% endif %}"
+
+# --- Development ---
+
+[tasks."dev:deps"]
+description = "Install Ruby dependencies"
+run = "bundle install"
+
+[tasks."dev:spec"]
+description = "Run the spec suite"
+run = "bin/rspec {{vars.SPEC_OPTS}}"
+
+[tasks."dev:lint"]
+description = "Run RuboCop"
+run = "bin/rubocop"
+
+[tasks."dev:guard"]
+description = "Auto-run specs on file change"
+run = "bin/guard"
+
+[tasks."dev:docs"]
+description = "Generate YARD API documentation into ./doc"
+run = "bin/yard"

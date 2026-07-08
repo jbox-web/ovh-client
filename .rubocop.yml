@@ -1,0 +1,62 @@
+plugins:
+  - rubocop-performance
+  - rubocop-rake
+  - rubocop-rspec
+
+AllCops:
+  TargetRubyVersion: 3.2
+  NewCops: enable
+  # Merge our exclusions with RuboCop's defaults (vendor/**/*, etc.) instead of
+  # replacing them, so a vendored bundle (CI bundler-cache) is never inspected.
+  inherit_mode:
+    merge:
+      - Exclude
+  # Bundler-generated binstubs are not project source.
+  Exclude:
+    - bin/*
+
+# The dash-named entry file is a Zeitwerk bootstrap, not a namespace file.
+Style/Documentation:
+  Enabled: false
+
+Metrics/BlockLength:
+  Exclude:
+    - 'spec/**/*'
+    - '*.gemspec'
+
+# The dash-named entry file is the Zeitwerk bootstrap, not a namespace file.
+Naming/FileName:
+  Exclude:
+    - 'lib/ovh-client.rb'
+
+# This gem does not opt into RubyGems MFA metadata.
+Gemspec/RequireMFA:
+  Enabled: false
+
+# Gemspec metadata lines (description/summary) are naturally long.
+Layout/LineLength:
+  Exclude:
+    - '*.gemspec'
+
+# Specs are grouped under spec/ovh_client/ by component, not by class-name path.
+RSpec/SpecFilePathFormat:
+  Enabled: false
+
+# Specs deliberately group related assertions per example.
+RSpec/MultipleExpectations:
+  Enabled: false
+
+RSpec/ExampleLength:
+  Enabled: false
+
+# Compact test stubs and helpers use idioms the default cops dislike in specs.
+Style/Semicolon:
+  Exclude:
+    - 'spec/**/*'
+
+Metrics/MethodLength:
+  Exclude:
+    - 'spec/**/*'
+
+RSpec/MessageSpies:
+  Enabled: false

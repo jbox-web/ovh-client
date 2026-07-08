@@ -1,0 +1,25 @@
+# Ignore bundler config.
+.bundle/
+
+# Ignore Gemfile.lock
+Gemfile.lock
+gemfiles/*.lock
+
+# Ignore test files
+coverage/
+
+# Ignore generated YARD documentation
+.yardoc/
+doc/
+
+# Ignore ruby-lsp local files
+.ruby-lsp/
+
+# Ignore local Claude settings
+.claude/settings.local.json
+
+# Ignore MacOS files
+.DS_Store
+
+# Ignore codegraph db
+/.codegraph
